@@ -14,14 +14,23 @@ const maxT = document.getElementById('temp-max')
 const hum = document.getElementById('humidity')
 
 const key = "7f7d3a57014833e6eaca1aeb678fe5c4"
+
+
 btn.addEventListener('click', () => getWeather())
 
 
+
 async function getWeather() {
+
+
   const zip = input.value
   const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=${key}&units=imperial
 `)
+  if (response.status === 404) {
+  alert("Zipcode is Invalid")
+}
   const data = await response.json()
+
   console.log(data);
   cityName.innerText = data.name;
   lat.innerText = data.coord.lat;
@@ -34,4 +43,5 @@ async function getWeather() {
   minT.innerText = data.main.temp_min;
   maxT.innerText = data.main.temp_max;
   hum.innerText = data.main.humidity;
+
 }
