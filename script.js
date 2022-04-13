@@ -15,23 +15,24 @@ const hum = document.getElementById('humidity')
 
 const key = "7f7d3a57014833e6eaca1aeb678fe5c4"
 
-
+//executes the get weather function on click of the button
 btn.addEventListener('click', () => getWeather())
 
-
-
 async function getWeather() {
-
 
   const zip = input.value
   const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=${key}&units=imperial
 `)
+  //catches invalid inputs
   if (response.status === 404) {
   alert("Zipcode is Invalid")
 }
+else {
   const data = await response.json()
 
   console.log(data);
+
+  //assings the JSON data from API to text fields
   cityName.innerText = data.name;
   lat.innerText = data.coord.lat;
   long.innerText = data.coord.lon;
@@ -44,4 +45,5 @@ async function getWeather() {
   maxT.innerText = data.main.temp_max;
   hum.innerText = data.main.humidity;
 
+}
 }
