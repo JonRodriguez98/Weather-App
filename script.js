@@ -19,7 +19,7 @@ btn.addEventListener('click', () => getWeather())
 
 async function getWeather() {
   const zip = input.value
-  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=${key}
+  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=${key}&units=imperial
 `)
   const data = await response.json()
   console.log(data);
