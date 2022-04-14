@@ -24,7 +24,7 @@ async function getWeather() {
   const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=${key}&units=imperial
 `)
   //catches invalid inputs
-  if (response.status === 404) {
+  if (response.status === 404 || response.status === 400) {
   alert("Zipcode is Invalid")
 }
 else {
