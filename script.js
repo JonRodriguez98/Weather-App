@@ -24,26 +24,27 @@ async function getWeather() {
   const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=${key}&units=imperial
 `)
   //catches invalid inputs
-  if (response.status === 404 || response.status === 400) {
-  alert("Zipcode is Invalid")
+  if (response.ok) {
+    const data = await response.json()
+
+    console.log(data);
+
+    //assings the JSON data from API to text fields
+    cityName.innerText = data.name;
+    lat.innerText = data.coord.lat;
+    long.innerText = data.coord.lon;
+    wMain.innerText = data.weather[0].main;
+    wDesc.innerText = data.weather[0].description;
+    spd.innerText = data.wind.speed;
+    deg.innerText = data.wind.deg;
+    cur.innerText = data.main.temp;
+    minT.innerText = data.main.temp_min;
+    maxT.innerText = data.main.temp_max;
+    hum.innerText = data.main.humidity;
+
 }
 else {
-  const data = await response.json()
-
-  console.log(data);
-
-  //assings the JSON data from API to text fields
-  cityName.innerText = data.name;
-  lat.innerText = data.coord.lat;
-  long.innerText = data.coord.lon;
-  wMain.innerText = data.weather[0].main;
-  wDesc.innerText = data.weather[0].description;
-  spd.innerText = data.wind.speed;
-  deg.innerText = data.wind.deg;
-  cur.innerText = data.main.temp;
-  minT.innerText = data.main.temp_min;
-  maxT.innerText = data.main.temp_max;
-  hum.innerText = data.main.humidity;
+alert("Zipcode is Invalid")
 
 }
 }
